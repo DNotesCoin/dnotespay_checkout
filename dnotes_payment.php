@@ -1,15 +1,15 @@
 <?php
-        $amount_price = $_POST['amount'];
-        $tolerance = $_POST['tolerance'];
+        $amount_price = (float)$_POST['amount'];
+        $tolerance = (float)$_POST['tolerance'];
         if($tolerance)
             $tolerance = $tolerance;
         else
             $tolerance = 0.01;
-        $confirmation_url = $_POST['confirmation_url'];
-        $confirmations_num = $_POST['confirm_num'];
-        $dnotes_address = $_POST['d_address'];
-        $p_description = $_POST['p_description'];
-        $order_num = $_POST['order_num'];
+        $confirmation_url = filter_input(INPUT_POST, 'confirmation_url', FILTER_SANITIZE_URL);
+        $confirmations_num = (int)$_POST['confirm_num'];
+        $dnotes_address = filter_input(INPUT_POST, 'd_address', FILTER_SANITIZE_STRING);
+        $p_description = filter_input(INPUT_POST, 'p_description', FILTER_SANITIZE_STRING);
+        $order_num = filter_input(INPUT_POST, 'order_num', FILTER_SANITIZE_STRING);
 ?>
 
 <!DOCTYPE html>
@@ -204,7 +204,7 @@
                        type: "POST",
                        url: "dnotes_ajax.php",
                        data: {
-                        order_num : <?php echo $order_num; ?>, 
+                        order_num : "<?php echo $order_num; ?>", 
                         amount : send_mount,
                         address : send_value_address,
                         tolerance : tolerance,
