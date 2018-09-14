@@ -11,12 +11,12 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$order_num = $_POST['order_num'];
-$amount = $_POST['amount'];
-$address = $_POST['address'];
-$invoice_num = $_POST['invoice_num'];
-$tolerance = $_POST['tolerance'];
-$confirmations_num = $_POST['confirmations_num'];
+$order_num = filter_input(INPUT_POST, 'order_num', FILTER_SANITIZE_STRING);
+$amount = (float)$_POST['amount'];
+$address = filter_input(INPUT_POST, 'address', FILTER_SANITIZE_STRING);
+$invoice_num = filter_input(INPUT_POST, 'invoice_num', FILTER_SANITIZE_STRING);
+$tolerance = (float)$_POST['tolerance'];
+$confirmations_num = (int)$_POST['confirmations_num'];
 $today_value = date("Y-m-d H:i:s");
 
 $sql = "INSERT INTO dnotes (`order_num` , `amount` , `address` , `invoice_num` , `tolerance` , `confirmations_num` , `date` , `state`) 
