@@ -34,7 +34,9 @@ function CheckPayment( $address , $amount , $tolerance , $rowid , $row_num )
     {
         $update_sql = 'UPDATE dnotes SET `state` = "complete" where `id` = ' . $rowid;
         $conn->query($update_sql);
-		//***UPDATE YOUR ORDER TO MARK IT COMPLETE HERE***
+        return true;
+    } else {
+        return false;
     }
 } 
 
@@ -43,9 +45,11 @@ $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        CheckPayment( $row["address"] , $row["amount"] , $row["tolerance"] , $row["id"] , $row["confirmations_num"] );
+        $confirmed = CheckPayment( $row["address"] , $row["amount"] , $row["tolerance"] , $row["id"] , $row["confirmations_num"] );
+	if ($confirmed){
+		//***UPDATE YOUR ORDER TO MARK IT COMPLETE HERE***
+	}
     }
 }
 
 $conn->close();
-?>
