@@ -33,7 +33,7 @@ require_once("button.php");
 ### Method 2
 Copy the coding - *including the configuration values* - and place in parts into your checkout page where needed. The button calls the Javascript function `PaymentpageShow()` when clicked to submit the form, creating the new window for DNotes payment. You can add additional functionality here as needed:
   * Submit a separate, main form to a hidden iFrame
-  * Perform actions via AJAX (such as validating checkout data, submitting cart/order info, etc)
+  * Perform actions via AJAX (such as validating checkout data, submitting and saving cart/order info, etc)
 
 
 ## Cron
